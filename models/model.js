@@ -1,8 +1,8 @@
 import Sequelize, { DataTypes, Model } from 'sequelize'
 
-const sequelize = new Sequelize('postgresql:///recipe_app')
+const sequelize = new Sequelize('postgresql:///recipe_app', { define: {underscored: true}})
 
-class Ingredient extends Model {}
+export class Ingredient extends Model {}
 
 Ingredient.init(
     { 
@@ -27,7 +27,7 @@ Ingredient.init(
         timestamps: false,
     })
 
-class Recipe extends Model {}
+export class Recipe extends Model {}
 
 Recipe.init(
     {
@@ -54,7 +54,7 @@ Recipe.init(
         timestamps: false,
     })
 
-class RecipeIngredient extends Model {}
+export class RecipeIngredient extends Model {}
 
 RecipeIngredient.init(
     {
@@ -74,7 +74,7 @@ RecipeIngredient.init(
         timestamps: false,
     })
 
-class Author extends Model {}
+export class Author extends Model {}
 
 Author.init(
     {
@@ -108,5 +108,5 @@ Ingredient.hasMany(RecipeIngredient, {foreignKey: 'ingredientId'});
 RecipeIngredient.belongsTo(Ingredient, {foreignKey: 'ingredientId'});
 
 
-await sequelize.sync({ force: true })
-await sequelize.close()
+// await sequelize.sync({ force: true })
+// await sequelize.close()
